@@ -16,7 +16,7 @@ BASIC VERSION
 -------------
 Startup Message:    *** COMMODORE BASIC 4.0 ***
 Memory:             32K RAM
-Free Memory:        29,269 bytes (at boot with DSKY program loaded)
+Free Memory:        31,741 bytes
 
 ROM CONFIGURATION
 -----------------
@@ -102,7 +102,7 @@ Connected:          PETdisk MAX v3 (SD card IEEE-488 interface)
 PRESERVATION NOTES
 ------------------
 Date Documented:    December 17, 2024
-Documented By:      Owner working with AI assistant (Claude)
+Documented By:      Owner (Vance Thompson) working with AI assistant (Claude)
 Condition:          Fully functional, all systems operational
 Special Care:       - Custom editor ROM (UD7) is irreplaceable
                     - Consider backing up/dumping UD7 EPROM for preservation
@@ -116,7 +116,6 @@ ADDITIONAL OBSERVATIONS
 - Keyboard fully functional
 - Display clear and readable
 - Programs can be created using custom Python tokenizer for PET BASIC 2.0
-- Machine has been used for Apollo DSKY simulator development
 
 TOKENIZER INFORMATION
 ---------------------
@@ -129,19 +128,6 @@ A custom Python tokenizer was developed for this PET to properly create
 
 The tokenizer creates binary-compatible PRG files that match PET-native
 saved files byte-for-byte.
-
-SOFTWARE DEVELOPED
-------------------
-- Apollo DSKY Simulator (multiple versions)
-- Verb 35 (Lamp Test) functional
-- Verb 16 Noun 36 (Display Time) functional
-- Enhanced visual layouts with proper DSKY appearance
-
-FILES CREATED
--------------
-- DSKY_V2.PRG (2.5K) - Working DSKY with lamp test
-- DSKY_IMPROVED.PRG (3.4K) - Enhanced layout and features
-- tokenize_fixed.py - Custom PET BASIC tokenizer with operator support
 
 TECHNICAL DISCOVERIES
 ---------------------
