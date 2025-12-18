@@ -101,7 +101,7 @@ Connected:          PETdisk MAX v3 (SD card IEEE-488 interface)
 
 PRESERVATION NOTES
 ------------------
-Date Documented:    December 17, 2024
+Date Documented:    December 17, 2025
 Documented By:      Owner (Vance Thompson) working with AI assistant (Claude)
 Condition:          Fully functional, all systems operational
 Special Care:       - Custom editor ROM (UD7) is irreplaceable
