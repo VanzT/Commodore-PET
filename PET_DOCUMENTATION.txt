@@ -119,8 +119,8 @@ ADDITIONAL OBSERVATIONS
 
 TOKENIZER INFORMATION
 ---------------------
-A custom Python tokenizer was developed for this PET to properly create
-.PRG files with correct:
+A custom Python tokenizer ("tokenizer-for-BASIC-2.0.py")was developed for 
+this PET to properly create .PRG files with correct:
 - PET BASIC 2.0 token values (PRINT=$99, END=$80, etc.)
 - Proper load address ($0401 for PET)
 - Correct line link pointers
@@ -128,6 +128,8 @@ A custom Python tokenizer was developed for this PET to properly create
 
 The tokenizer creates binary-compatible PRG files that match PET-native
 saved files byte-for-byte.
+
+"tokenize-4.0.py" includes disk commands that the 2.0 version omits.
 
 TECHNICAL DISCOVERIES
 ---------------------
