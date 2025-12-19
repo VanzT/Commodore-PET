@@ -27,11 +27,13 @@ UD7         Custom EPROM        Editor ROM ($E000) - "4080 9" E0 60hz"
 UD8         901465-21           BASIC 4 Part 3 ($D000)
 UD9         901465-20           BASIC 4 Part 2 ($C000)
 UD10        901465-23           BASIC 4 Part 1 ($B000) - Fixed version!
+UD11        Unknown chip        Command-O by Rob Chang (c)1980 ($9000)
+UD12        MOS 1980 COM40U     Commodore Utility ROM, dated 0981 ($A000)
 
 CUSTOM EDITOR ROM (UD7)
 -----------------------
 Label:              "4080 9" E0 60hz"
-Type:               EPROM (appears to have tape covering window)
+Type:               EPROM (tape label covering window)
 Purpose:            Custom editor ROM for 9-inch screen operation
                     - Supports 40-column display mode
                     - Configured for 9-inch monitor (NOT standard 12")
@@ -41,6 +43,50 @@ Significance:       This ROM is likely unique or very rare. It was custom-
                     created to allow the Universal Dynamic PET board (8032089)
                     to work properly with a 9-inch screen. Standard 4032 
                     editor ROMs expect a 12-inch screen.
+
+EXPANSION ROM: COMMAND-O (UD11)
+--------------------------------
+Location:           UD11 ($9000-$9FFF, 36864-40959 decimal)
+Chip Label:         Unmarked (physical inspection)
+Software:           Command-O by Rob Chang
+Copyright:          (c) 1980
+Activation:         SYS 36864
+Type:               Third-party utility package
+Features:           Programming and development tools including:
+                    - RENUMBER: Renumber BASIC programs
+                    - FIND: Search for text in programs
+                    - AUTO: Automatic line numbering
+                    - MERGE: Combine programs
+                    - DELETE: Delete line ranges
+                    - DUMP: Memory dumps
+                    - TRACE: Debug programs
+                    - Additional utility commands
+Significance:       Popular third-party enhancement for PET development work.
+                    Indicates this machine was used for serious programming.
+
+EXPANSION ROM: COM40U (UD12)
+-----------------------------
+Location:           UD12 ($A000-$AFFF, 40960-45055 decimal)
+Chip Label:         MOS 1980 COM40U 0981
+Manufacturer:       MOS Technology (Commodore)
+Date Code:          0981 (September 1981)
+Activation:         SYS 40960 (also SYS 40961, 40962)
+Type:               Official Commodore utility ROM
+Function:           Machine language monitor/debugger (TIM-like)
+                    - Entry points at $A000, $A001, $A002
+                    - Provides debugging and development capabilities
+                    - Specific to 40-column configurations
+Purpose:            COM40U likely stands for "Commodore 40-column Utility"
+                    This ROM was probably bundled with upgraded 3032s or
+                    early 4032s to provide enhanced development tools.
+Significance:       Rare/undocumented Commodore official ROM. May be one of
+                    few surviving examples. First byte is $3E (62 decimal),
+                    not standard JMP instruction, suggesting specialized
+                    initialization or banking logic.
+Notes:              SYS to $A000-$A002 drops into TIM monitor
+                    SYS to higher addresses ($A028+) causes crash
+                    No readable text strings in first 60 bytes
+                    This ROM warrants further documentation and preservation
 
 MACHINE HISTORY & CONFIGURATION
 --------------------------------
