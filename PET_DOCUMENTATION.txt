@@ -4,11 +4,13 @@ COMMODORE PET COMPUTER - SYSTEM DOCUMENTATION
 
 MACHINE IDENTIFICATION
 ----------------------
-Model:              CBM 3032 (upgraded to 4032 configuration)
+Model:              Commodore PET 4032-N (9-inch NTSC variant)
+Model Badge:        "Commodore PET Computer Model 4032" (front panel)
+Rear Label:         "4032-N"
 Serial Number:      B5001049
 Asset Tag:          MO540496-CA (scratched on rear)
 Service Tag:        84-14212 (near voltage regulators, possibly 1984 service)
-Screen Size:        9-inch (unusual for 4000-series configuration)
+Screen Size:        9-inch (factory 4032-9 variant)
 Motherboard:        ASSY NO 8032089 (Universal Dynamic PET Board)
 Board Stamp:        1102-03 (manufacturing/revision code)
 
@@ -33,16 +35,18 @@ UD12        MOS 1980 COM40U     Commodore Utility ROM, dated 0981 ($A000)
 CUSTOM EDITOR ROM (UD7)
 -----------------------
 Label:              "4080 9" E0 60hz"
-Type:               EPROM (tape label covering window)
+Type:               EPROM (appears to have tape covering window)
 Purpose:            Custom editor ROM for 9-inch screen operation
                     - Supports 40-column display mode
-                    - Configured for 9-inch monitor (NOT standard 12")
+                    - Configured for 9-inch monitor (4032-9 variant)
                     - NTSC 60Hz refresh rate
                     - May include 40/80 column switching capability
-Significance:       This ROM is likely unique or very rare. It was custom-
-                    created to allow the Universal Dynamic PET board (8032089)
-                    to work properly with a 9-inch screen. Standard 4032 
-                    editor ROMs expect a 12-inch screen.
+Significance:       Custom-burned ROM specifically for 4032-9 models to allow
+                    the Universal Dynamic PET board (8032089) to work properly 
+                    with a 9-inch screen. Standard 4032-12 editor ROMs expect 
+                    a 12-inch screen. Likely created by Commodore or authorized 
+                    service center. Important for preservation as the 4032-9 
+                    variant was less common than the 4032-12.
 
 EXPANSION ROM: COMMAND-O (UD11)
 --------------------------------
@@ -77,8 +81,9 @@ Function:           Machine language monitor/debugger (TIM-like)
                     - Provides debugging and development capabilities
                     - Specific to 40-column configurations
 Purpose:            COM40U likely stands for "Commodore 40-column Utility"
-                    This ROM was probably bundled with upgraded 3032s or
-                    early 4032s to provide enhanced development tools.
+                    This ROM was probably bundled with some 4032 models or
+                    available as an aftermarket add-on to provide enhanced
+                    development tools.
 Significance:       Rare/undocumented Commodore official ROM. May be one of
                     few surviving examples. First byte is $3E (62 decimal),
                     not standard JMP instruction, suggesting specialized
@@ -90,19 +95,23 @@ Notes:              SYS to $A000-$A002 drops into TIM monitor
 
 MACHINE HISTORY & CONFIGURATION
 --------------------------------
-This PET represents an interesting hybrid/upgrade configuration:
+This machine is a factory Commodore PET 4032-N with aftermarket enhancements:
 
-1. ORIGINAL CONFIGURATION (circa 1980-1981)
-   - Started as a CBM 3032 (9-inch screen, 32K RAM)
-   - Likely had BASIC 2.0 or early BASIC 4.0 ROMs
-   - "B" prefix serial number suggests "Business keyboard" variant
+1. FACTORY CONFIGURATION (circa 1980-1981)
+   - Commodore PET 4032-N (9-inch NTSC variant)
+   - The 4032 series came in two main versions:
+     * 4032-12: 12-inch screen (more common)
+     * 4032-9: 9-inch screen (less common - THIS MODEL)
+   - Universal Dynamic PET board (8032089) - standard for 4032 series
+   - BASIC 4.0 with fixed ROM revision (901465-23)
+   - Custom 9-inch editor ROM ("4080 9" E0 60hz")
+   - 32K RAM, 40-column display
+   - "B" prefix serial number: likely production batch code
 
-2. MAJOR UPGRADE (date unknown, possibly early 1980s)
-   - Motherboard replaced with Universal Dynamic PET board (8032089)
-   - Upgraded to BASIC 4.0 with fixed ROM set (901465-23, not -19)
-   - Custom editor ROM created/burned to support 9" screen
-   - Maintained 40-column display mode
-   - Configuration now functionally equivalent to 4032
+2. AFTERMARKET ENHANCEMENTS (date unknown, possibly early 1980s)
+   - Command-O utility ROM installed in UD11 expansion socket
+   - COM40U Commodore utility ROM installed in UD12 expansion socket
+   - Configuration customized for professional development/programming work
 
 3. SERVICE/REPAIR (1984, based on service tag)
    - Work order 84-14212 performed
@@ -111,7 +120,7 @@ This PET represents an interesting hybrid/upgrade configuration:
 4. INSTITUTIONAL OWNERSHIP
    - Asset tag "MO540496-CA" indicates institutional use
    - Likely owned by school, government office, or business
-   - Professional upgrade/customization suggests technical expertise
+   - Professional customization suggests technical expertise
    - "MO" and "CA" may indicate geographic locations or departments
 
 TECHNICAL SPECIFICATIONS
@@ -120,8 +129,8 @@ Processor:          MOS 6502
 RAM:                32K dynamic RAM (4116 chips)
 Video:              40-column x 25-line display
 Character ROM:      2K character generator
-Monitor:            9-inch monochrome CRT
-Keyboard:           Full-size business keyboard layout
+Monitor:            9-inch monochrome CRT (factory 4032-9 configuration)
+Keyboard:           Full-size graphics keyboard layout
 I/O:                IEEE-488, User port, 2x Cassette ports
 
 NOTABLE QUIRKS
@@ -135,10 +144,10 @@ NOTABLE QUIRKS
    - May be related to custom editor ROM or board revision
    - Not a functional problem, just unusual behavior
 
-2. 9-INCH SCREEN ON UNIVERSAL BOARD
-   - The 8032089 board was typically used with 12" screens
-   - Custom editor ROM enables proper 9" operation
-   - This configuration is uncommon and possibly unique
+2. 9-INCH SCREEN CONFIGURATION
+   - The 4032-9 variant is less common than the 4032-12 (12-inch)
+   - Custom editor ROM (UD7) enables proper 9-inch operation
+   - This configuration is authentic factory spec, not an upgrade
 
 PERIPHERAL DEVICES
 ------------------
@@ -148,12 +157,20 @@ Connected:          PETdisk MAX v3 (SD card IEEE-488 interface)
 PRESERVATION NOTES
 ------------------
 Date Documented:    December 17, 2025
+Last Updated:       December 18, 2025
 Documented By:      Owner (Vance Thompson) working with AI assistant (Claude)
 Condition:          Fully functional, all systems operational
-Special Care:       - Custom editor ROM (UD7) is irreplaceable
-                    - Consider backing up/dumping UD7 EPROM for preservation
-                    - ROMs are soldered (not socketed)
-                    - Monitor is period-correct 9" CRT
+Special Care:       - Custom editor ROM (UD7) is important for 4032-9 preservation
+                    - Consider backing up/dumping all ROMs for preservation
+                    - COM40U ROM (UD12) appears undocumented - HIGH PRIORITY
+                    - ROMs should be dumped and shared with preservation community
+
+ROM DUMPS COMPLETED
+-------------------
+Date:               December 18, 2025
+Files Created:      - pet-4032-editor-9inch-60hz.bin (UD7)
+                    - pet-command-o-rob-chang-1980.bin (UD11)
+                    - pet-com40u-mos-0981.bin (UD12)
 
 ADDITIONAL OBSERVATIONS
 -----------------------
@@ -161,21 +178,19 @@ ADDITIONAL OBSERVATIONS
 - IEEE-488 disk operations work correctly via PETdisk MAX
 - Keyboard fully functional
 - Display clear and readable
-- Programs can be created using custom Python tokenizer for PET BASIC 2.0
+- Programs can be created using custom Python tokenizer for PET BASIC 2.0/4.0
 
 TOKENIZER INFORMATION
 ---------------------
-A custom Python tokenizer ("tokenizer-for-BASIC-2.0.py")was developed for 
-this PET to properly create .PRG files with correct:
-- PET BASIC 2.0 token values (PRINT=$99, END=$80, etc.)
+A custom Python tokenizer was developed for this PET to properly create
+.PRG files with correct:
+- PET BASIC 2.0/4.0 token values (PRINT=$99, END=$80, etc.)
 - Proper load address ($0401 for PET)
 - Correct line link pointers
 - Proper operator tokenization (=, <, >, +, -, *, /, etc.)
 
 The tokenizer creates binary-compatible PRG files that match PET-native
 saved files byte-for-byte.
-
-"tokenize-4.0.py" includes disk commands that the 2.0 version omits.
 
 TECHNICAL DISCOVERIES
 ---------------------
@@ -186,34 +201,71 @@ confirmed:
 - Line link pointers point to next line's link address in memory
 - Memory address formula: load_addr + (file_offset - 2)
 
-RECOMMENDED FUTURE PRESERVATION
--------------------------------
-1. Dump custom editor ROM from UD7 to preserve unique software
-2. Document any jumper settings on motherboard
-3. Photograph motherboard for reference
-4. Test all jumper configurations if possible
-5. Create backup of custom editor ROM image
-6. Share ROM image with vintage computing preservation community
+ROM Dumping discoveries:
+- OPEN channel 2 required for proper sequential file writing
+- Format "0:filename,S,W" prevents multiple file creation
+- PRINT#1 with semicolon suppresses line breaks in sequential files
+- PETdisk adds .SEQ extension to sequential files automatically
 
 RESOURCES & REFERENCES
 -----------------------
 PET Documentation:      http://www.zimmers.net/cbmpics/cbm/PETx/
 PET Firmware Archive:   http://www.zimmers.net/anonftp/pub/cbm/firmware/
-Universal Dynamic PET:  Used in 4032, 8032, and upgraded 3032 models
+Universal Dynamic PET:  Used in 4032, 8032, and some upgraded 3032 models
 Board 8032089:          Supports 40/80 column, 16K/32K configurations
+4032 Variants:          4032-9 (9-inch screen), 4032-12 (12-inch screen)
 
 CONTACT INFORMATION FOR PRESERVATION
 -------------------------------------
-If this machine is ever retired or requires major service, the custom
-editor ROM (UD7) should be preserved. Contact vintage computing
-preservation groups:
+If this machine is ever retired or requires major service, the ROM dumps
+should be shared with vintage computing preservation groups:
 - The VICE Project (PET emulator development)
 - Zimmers.net archive maintainers
 - Vintage Computer Federation
 - Computer History Museum
 
 ================================================================================
+SUMMARY OF UNIQUE CONFIGURATION
+================================================================================
+
+This Commodore PET represents a well-documented factory 4032-N configuration
+with significant aftermarket enhancements:
+
+1. FACTORY 4032-9 VARIANT
+   - Authentic Commodore PET 4032-N with 9-inch screen
+   - Less common than 4032-12 (12-inch) variant
+   - Universal Dynamic PET board (8032089) - standard for series
+   - Custom 9-inch editor ROM - important for 4032-9 preservation
+
+2. CUSTOM SOFTWARE
+   - Factory custom 9-inch editor ROM ("4080 9" E0 60hz")
+   - Command-O utility package (third-party, 1980)
+   - COM40U Commodore utility ROM (rare, September 1981)
+   - BASIC 4.0 with fixed ROM revision (901465-23)
+
+3. INSTITUTIONAL HISTORY
+   - Asset tag suggests school/government/business ownership
+   - Professional-grade aftermarket expansion ROMs installed
+   - Service work performed in 1984
+   - Configured for serious programming/development work
+
+4. PRESERVATION VALUE
+   - Factory 4032-9: Less common than 4032-12 variant
+   - Custom 9" editor ROM: Important for 4032-9 preservation
+   - COM40U ROM: Undocumented in known archives, HIGH preservation priority
+   - Complete working system with period-correct peripherals
+   - ROM dumps completed and ready for preservation community
+
+This machine is not just a working vintage computer, but a significant
+piece of computing history that documents both factory variants and the
+professional customization practices of the early 1980s microcomputer era.
+
+The 4032-9 variant with its custom 9-inch editor ROM represents an important
+but less-documented branch of the PET 4000 series evolution.
+
+================================================================================
 END OF DOCUMENTATION
-Generated: December 17, 2024
+Generated: December 17, 2025
+Updated: December 18, 2025 (corrected machine identification, added ROM dumps)
 This document should be stored with the computer for future reference.
 ================================================================================
