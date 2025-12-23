@@ -1,0 +1,167 @@
+================================================================================
+ICBM GAME - VARIABLE REFERENCE
+================================================================================
+All variables are 2 characters max (PET BASIC limitation)
+Last updated: 2024-12-22
+
+================================================================================
+ARRAYS
+================================================================================
+M$(100,7)  Missile data array (100 missiles max)
+           Field 0: Hex location (e.g., "1007")
+           Field 1: Type (e.g., "TT", "M2", "M3", "SS18")
+           Field 2: Duration remaining (turns in flight)
+           Field 3: Movement points per turn
+           Field 4: Strength (damage to cities)
+           Field 5: Owner ("1"=USA, "2"=USSR)
+           Field 6: Status ("0"=inactive, "1"=active, "8"=impacted, "9"=destroyed)
+           Field 7: Target hex (where missile is headed)
+
+A$(15,4)   ABM site data array (15 sites max)
+           Field 0: Hex location
+           Field 1: Owner ("1"=USA, "2"=USSR)
+           Field 2: Rounds remaining
+           Field 3: Site designation letter (A-F)
+
+C$(50,3)   City data array (50 cities max)
+           Field 0: Hex location
+           Field 1: Point value remaining
+           Field 2: Owner ("1"=USA, "2"=USSR)
+
+B$(30,2)   Base data array (30 bases max)
+           Field 0: Hex location
+           Field 1: Number of missiles at base
+
+================================================================================
+COUNTERS & INDICES
+================================================================================
+AC         ABM Counter - total number of ABM sites created
+BC         Base Counter - total number of missile bases created
+CC         City Counter - total number of cities loaded
+MC         Missile Counter - total number of missiles created
+I          Generic loop counter (primary)
+J          Generic loop counter (secondary)
+K          Generic loop counter (tertiary)
+
+================================================================================
+GAME STATE
+================================================================================
+TU         Turn number (current turn)
+F1         First launch flag (1=USA, 2=USSR)
+UP         USSR Points (victory points)
+SP         USA (Self) Points (victory points)
+ML         Missiles Left to deploy (during USA setup)
+
+================================================================================
+ACTIVATION & MOVEMENT
+================================================================================
+AN         Activation Number (how many missiles can be activated this turn)
+NA         Number Activated (how many player is activating)
+AM         Active Missiles in the air (during game over check)
+NL         Number that can Launch (inactive missiles remaining)
+R          Roll result (die roll)
+
+================================================================================
+MISSILE DEPLOYMENT (USA SETUP)
+================================================================================
+TT         Titan II missiles remaining
+M2         Minuteman II missiles remaining
+M3         Minuteman III missiles remaining
+NT         Number of TT missiles for this base
+N2         Number of M2 missiles for this base
+N3         Number of M3 missiles for this base
+BM         Base Missiles (total for current base)
+BH$        Base Hex location (string)
+
+================================================================================
+ABM DEPLOYMENT
+================================================================================
+AH$        ABM Hex location (string)
+AR         ABM Rounds allocated to this site
+
+================================================================================
+MISSILE TARGETING & MOVEMENT
+================================================================================
+TG$        Target hex (string)
+TV         Target Value (point value of target city)
+NH$        Next Hex (string - where missile is moving to)
+FH$        From Hex (string - where activating missile from)
+MID        Missile ID (index in M$ array for found missile)
+
+================================================================================
+DISTANCE CALCULATIONS
+================================================================================
+DS         Distance (general distance calculation)
+FX         From X coordinate
+FY         From Y coordinate
+TX         Target X coordinate
+TY         Target Y coordinate
+NX         Next X coordinate
+NY         Next Y coordinate
+NX$        Next X as string
+NY$        Next Y as string
+AX         ABM X coordinate
+AY         ABM Y coordinate
+MX         Missile X coordinate
+MY         Missile Y coordinate
+
+================================================================================
+ABM INTERCEPTION
+================================================================================
+OW         Owner of missile being checked (1=USA, 2=USSR)
+DF         Defender checking for ABM (opposite of OW)
+NR         Nearest ABM site (index in A$ array)
+ND         Nearest Distance (to nearest ABM)
+AD         ABM Distance (distance from specific ABM to missile)
+HI         Hit flag (1=hit, 0=miss)
+AF$        ABM Fire response (Y/N from player)
+
+================================================================================
+CITY IMPACT
+================================================================================
+CV         City Value (current point value)
+CX         City hit by missile with strength X (damage amount)
+DI         Difference in victory points (for victory calculation)
+
+================================================================================
+BIDDING
+================================================================================
+CB         Computer Bid (USSR's bid for first launch)
+
+================================================================================
+USER INPUT
+================================================================================
+K$         Keyboard input (GET statement - single character)
+
+================================================================================
+NOTES
+================================================================================
+- All hex coordinates are 4-digit strings: "XXYY" where XX=column, YY=row
+- Owner field: "1"=USA, "2"=USSR (stored as strings in arrays)
+- Status codes: "0"=inactive, "1"=active, "8"=impacted, "9"=destroyed
+- PET BASIC only uses first 2 characters of variable names
+- String variables end with $ (e.g., TG$ = target hex)
+- Numeric variables have no suffix (e.g., TU = turn number)
+
+================================================================================
+RESERVED - DO NOT USE
+================================================================================
+These 2-character combinations are used by the code:
+AC, AD, AH, AM, AN, AR, AX, AY
+BC, BH, BM
+CB, CC, CV, CX
+DF, DI, DS
+F1, FH, FX, FY
+HI
+I
+J
+K, K$
+M2, M3, MC, MID, ML, MX, MY
+N2, N3, NA, ND, NH, NL, NR, NT, NX, NY
+OW
+R
+SP
+TG, TT, TU, TV, TX, TY
+UP
+
+================================================================================
