@@ -51,6 +51,7 @@ F1         First launch flag (1=USA, 2=USSR)
 UP         USSR Points (victory points)
 SP         USA (Self) Points (victory points)
 ML         Missiles Left to deploy (during USA setup)
+UH         USSR Header printed flag (for movement display)
 
 ================================================================================
 ACTIVATION & MOVEMENT
@@ -164,6 +165,6 @@ OW
 R
 SP
 TG, TT, TU, TV, TX, TY
-UP
+UH, UP
 
 ================================================================================
