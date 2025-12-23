@@ -91,7 +91,7 @@ MID        Missile ID (index in M$ array for found missile)
 ================================================================================
 DISTANCE CALCULATIONS
 ================================================================================
-DS         Distance (general distance calculation)
+DT         Distance Total (general distance calculation)
 DX         Delta X (difference in X coordinates)
 DY         Delta Y (difference in Y coordinates)
 FX         From X coordinate
@@ -152,7 +152,7 @@ These 2-character combinations are used by the code:
 AC, AD, AH, AM, AN, AR, AX, AY
 BC, BH, BM
 CB, CC, CV, CX
-DF, DI, DS, DX, DY
+DF, DI, DT, DX, DY
 F1, FH, FX, FY
 HI
 I
