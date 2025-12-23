@@ -1,0 +1,33 @@
+================================================================================
+ICBM GAME - OUTSTANDING BUGS & FEATURE REQUESTS
+================================================================================
+Last Updated: 2024-12-23
+
+================================================================================
+DISPLAY & USABILITY ISSUES
+================================================================================
+
+(None currently outstanding)
+
+================================================================================
+NOTES
+================================================================================
+- Both pause features have been implemented
+- USA player now has time to physically move counters on the map
+
+================================================================================
+COMPLETED FIXES (DO NOT RE-IMPLEMENT)
+================================================================================
+- Variable name conflicts (2-character limit issues)
+- Duplicate line numbers in city data
+- Hex distance calculation (was Manhattan, now proper hex)
+- City coordinates (all 22 USA cities corrected)
+- Activation chart formulas (now match physical map)
+- USSR targeting (now spreads fire across multiple cities)
+- ABM spam reduction (only shows when in range)
+- Display formatting improvements
+- USSR movement display optimization
+- PAUSE ON USSR MISSILE IMPACT - Implemented (waits for keypress after impact)
+- PAUSE WHEN SCREEN FILLS - Implemented (pauses every 20 lines during USSR movement)
+
+================================================================================
