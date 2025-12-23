@@ -7,7 +7,21 @@ Last Updated: 2024-12-23
 DISPLAY & USABILITY ISSUES
 ================================================================================
 
-(None currently outstanding)
+1. ACTIVATION COUNT ACCURACY & CLARITY
+   - Currently shows activation roll result even when no missiles remain
+   - Should show actual number of missiles that CAN be activated
+   - If USSR has 10 inactive missiles but rolls 18, should show "10" not "18"
+   - If USSR has 0 inactive missiles, should show "0" regardless of roll
+   
+   Proposed display improvements:
+   USA: "CAN ACTIVATE: 6 OUT OF XX MISSILES"
+        (where XX = total inactive missiles remaining)
+   
+   USSR: "U.S.S.R. ACTIVATES: XX MISSILES OUT OF YY REMAINING"
+         (where XX = min(roll result, inactive missiles))
+         (where YY = total inactive missiles)
+   
+   This gives both players better situational awareness of remaining forces.
 
 ================================================================================
 NOTES
