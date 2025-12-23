@@ -125,6 +125,7 @@ CITY IMPACT
 CV         City Value (current point value)
 CX         City hit by missile with strength X (damage amount)
 DI         Difference in victory points (for victory calculation)
+BJ         Best target city index (for AI targeting)
 
 ================================================================================
 BIDDING
@@ -151,7 +152,7 @@ RESERVED - DO NOT USE
 ================================================================================
 These 2-character combinations are used by the code:
 AC, AD, AH, AM, AN, AR, AX, AY
-BC, BH, BM
+BC, BH, BJ, BM
 CB, CC, CV, CX
 DF, DI, DT, DX, DY
 F1, FH, FX, FY
