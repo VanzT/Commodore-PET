@@ -23,6 +23,28 @@ DISPLAY & USABILITY ISSUES
    
    This gives both players better situational awareness of remaining forces.
 
+2. USA MISSILE SELECTION DURING ACTIVATION
+   - Currently USA activation automatically picks first available missiles
+   - No control over which specific missiles to launch from which bases
+   - Player should be able to choose specific missile types and bases each turn
+   
+   Example scenario:
+   - Turn 1: Want to launch 3x MX-3 missiles from Base A
+   - Turn 2: Want to launch 1x Titan II and 1x Minuteman II from same Base A
+   
+   Current system doesn't allow this strategic choice - it just activates the
+   first N missiles it finds regardless of type or location.
+   
+   Proposed solution:
+   - During USA activation phase, show list of bases with missile inventory
+   - Let player select which base to activate from
+   - Show missile types available in that base
+   - Let player choose which specific missiles to activate
+   - Repeat until activation count is exhausted or player is done
+   
+   This would give USA player tactical control over force composition per turn,
+   matching the strategic depth of the physical board game.
+
 ================================================================================
 NOTES
 ================================================================================
