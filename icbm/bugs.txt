@@ -7,23 +7,7 @@ Last Updated: 2024-12-23
 DISPLAY & USABILITY ISSUES
 ================================================================================
 
-1. ACTIVATION COUNT ACCURACY & CLARITY
-   - Currently shows activation roll result even when no missiles remain
-   - Should show actual number of missiles that CAN be activated
-   - If USSR has 10 inactive missiles but rolls 18, should show "10" not "18"
-   - If USSR has 0 inactive missiles, should show "0" regardless of roll
-   
-   Proposed display improvements:
-   USA: "CAN ACTIVATE: 6 OUT OF XX MISSILES"
-        (where XX = total inactive missiles remaining)
-   
-   USSR: "U.S.S.R. ACTIVATES: XX MISSILES OUT OF YY REMAINING"
-         (where XX = min(roll result, inactive missiles))
-         (where YY = total inactive missiles)
-   
-   This gives both players better situational awareness of remaining forces.
-
-2. USA MISSILE SELECTION DURING ACTIVATION
+1. USA MISSILE SELECTION DURING ACTIVATION
    - Currently USA activation automatically picks first available missiles
    - No control over which specific missiles to launch from which bases
    - Player should be able to choose specific missile types and bases each turn
@@ -65,5 +49,6 @@ COMPLETED FIXES (DO NOT RE-IMPLEMENT)
 - USSR movement display optimization
 - PAUSE ON USSR MISSILE IMPACT - Implemented (waits for keypress after impact)
 - PAUSE WHEN SCREEN FILLS - Implemented (pauses every 20 lines during USSR movement)
+- ACTIVATION COUNT ACCURACY - Implemented (shows actual available missiles, caps at inventory)
 
 ================================================================================
