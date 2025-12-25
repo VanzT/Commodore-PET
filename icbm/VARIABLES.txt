@@ -52,7 +52,9 @@ UP         USSR Points (victory points)
 SP         USA (Self) Points (victory points)
 ML         Missiles Left to deploy (during USA setup)
 UH         USSR Header printed flag (for movement display)
+UF         USA moving header printed Flag (for movement display)
 LC         Line Counter (for screen pause during USSR movement)
+MT         Missile Type string (for padding display)
 
 ================================================================================
 ACTIVATION & MOVEMENT
@@ -162,12 +164,12 @@ I
 J
 K, K$
 LC
-M2, M3, MC, MID, ML, MX, MY
+M2, M3, MC, MID, ML, MT, MX, MY
 N2, N3, NA, ND, NH, NL, NR, NT, NX, NY
 OW
 R
 SP
 TG, TT, TU, TV, TX, TY
-UH, UP
+UF, UH, UP
 
 ================================================================================
