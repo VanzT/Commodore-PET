@@ -63,6 +63,8 @@ AN         Activation Number (how many missiles can be activated this turn)
 NA         Number Activated (how many player is activating)
 AM         Active Missiles in the air (during game over check)
 NL         Number that can Launch (inactive missiles remaining)
+MS         Missile Selection string (player chooses missile type like "TT", "M2")
+IM         Inactive Missiles count (at a specific base)
 R          Roll result (die roll)
 
 ================================================================================
@@ -160,11 +162,11 @@ CB, CC, CV, CX
 DF, DI, DT, DX, DY
 F1, FH, FX, FY
 HI
-I
+I, IM
 J
 K, K$
 LC
-M2, M3, MC, MID, ML, MT, MX, MY
+M2, M3, MC, MID, ML, MS, MT, MX, MY
 N2, N3, NA, ND, NH, NL, NR, NT, NX, NY
 OW
 R
