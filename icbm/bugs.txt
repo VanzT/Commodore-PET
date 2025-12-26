@@ -29,6 +29,24 @@ DISPLAY & USABILITY ISSUES
    This would give USA player tactical control over force composition per turn,
    matching the strategic depth of the physical board game.
 
+2. USSR AI ABM-AWARE TARGETING
+   - Currently USSR AI uses spread-fire targeting (targets highest-value cities
+     with <3 missiles already assigned)
+   - Does not consider USA ABM defenses when selecting targets
+   - Should factor in ABM site density when choosing between similar targets
+   
+   Proposed enhancement:
+   - Count USA ABM sites within 3 hexes of each candidate city
+   - When choosing between cities of similar value, prefer lightly-defended ones
+   - Still maintain spread-fire logic (don't send >3 missiles to same city)
+   - Balance between city value and ABM defense strength
+   
+   This would make USSR AI more tactically realistic - avoiding heavily defended
+   targets when possible, similar to real nuclear doctrine.
+   
+   Note: Code structure already supports this - line 8362 area is where ABM
+   density check would be added.
+
 ================================================================================
 NOTES
 ================================================================================
