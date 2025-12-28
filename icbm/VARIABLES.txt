@@ -60,9 +60,17 @@ MT         Missile Type string (for padding display)
 ACTIVATION & MOVEMENT
 ================================================================================
 AN         Activation Number (how many missiles can be activated this turn)
-NA         Number Activated (how many player is activating)
+NA         Number Activated (count of missiles activated so far)
 AM         Active Missiles in the air (during game over check)
 NL         Number that can Launch (inactive missiles remaining)
+BA         Base Activations count (USSR AI - how many bases being activated)
+BM         Base Missiles count (missiles at selected base)
+BZ         Base siZe (temp variable for USSR base selection)
+SL         Slots Left (activation slots remaining)
+AB         Activated from Base (count from current base)
+YN         Yes/No response string
+BB         Best Base hex (USSR AI selection)
+BF         Best Fit base hex (USSR AI fallback - smallest base)
 R          Roll result (die roll)
 
 ================================================================================
@@ -160,11 +168,11 @@ CB, CC, CV, CX
 DF, DI, DT, DX, DY
 F1, FH, FX, FY
 HI
-I
+I, IM
 J
 K, K$
 LC
-M2, M3, MC, MID, ML, MT, MX, MY
+M2, M3, MC, MID, ML, MS, MT, MX, MY
 N2, N3, NA, ND, NH, NL, NR, NT, NX, NY
 OW
 R
