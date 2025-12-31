@@ -99,6 +99,7 @@ TG$        Target hex (string)
 TV         Target Value (point value of target city)
 NH$        Next Hex (string - where missile is moving to)
 FH$        From Hex (string - where activating missile from)
+MH         Movement Hex counter (for hex-by-hex USSR movement)
 MID        Missile ID (index in M$ array for found missile)
 
 ================================================================================
