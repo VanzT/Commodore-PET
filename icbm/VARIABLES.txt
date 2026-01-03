@@ -7,7 +7,7 @@ Last updated: 2024-12-22
 ================================================================================
 ARRAYS
 ================================================================================
-M$(100,7)  Missile data array (100 missiles max)
+M$(100,8)  Missile data array (100 missiles max)
            Field 0: Hex location (e.g., "1007")
            Field 1: Type (e.g., "TT", "M2", "M3", "SS18")
            Field 2: Duration remaining (turns in flight)
@@ -16,6 +16,7 @@ M$(100,7)  Missile data array (100 missiles max)
            Field 5: Owner ("1"=USA, "2"=USSR)
            Field 6: Status ("0"=inactive, "1"=active, "8"=impacted, "9"=destroyed)
            Field 7: Target hex (where missile is headed)
+           Field 8: ABM attacked hex (last hex where ABM engaged, prevents double attack)
 
 A$(15,4)   ABM site data array (15 sites max)
            Field 0: Hex location
@@ -98,6 +99,7 @@ TG$        Target hex (string)
 TV         Target Value (point value of target city)
 NH$        Next Hex (string - where missile is moving to)
 FH$        From Hex (string - where activating missile from)
+MH         Movement Hex counter (for hex-by-hex USSR movement)
 MID        Missile ID (index in M$ array for found missile)
 
 ================================================================================
@@ -124,9 +126,13 @@ ABM INTERCEPTION
 ================================================================================
 OW         Owner of missile being checked (1=USA, 2=USSR)
 DF         Defender checking for ABM (opposite of OW)
+NS         Number of Sites in range
 NR         Nearest ABM site (index in A$ array)
 ND         Nearest Distance (to nearest ABM)
 AD         ABM Distance (distance from specific ABM to missile)
+TR         Total Rounds to fire (combined from all sites)
+FR         Fire Rounds (from specific site, also loop counter)
+RG         Range to target (1, 2, or 3 hexes)
 HI         Hit flag (1=hit, 0=miss)
 AF$        ABM Fire response (Y/N from player)
 
