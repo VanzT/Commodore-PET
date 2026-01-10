@@ -97,6 +97,9 @@ MISSILE TARGETING & MOVEMENT
 ================================================================================
 TG$        Target hex (string)
 TV         Target Value (point value of target city)
+BA         Best ABM count (fewest ABM sites near best target - USSR AI)
+CA         City ABM count (ABM sites within 3 hexes of candidate city - USSR AI)
+CV         City Value (temp for USSR AI evaluation)
 NH$        Next Hex (string - where missile is moving to)
 FH$        From Hex (string - where activating missile from)
 MH         Movement Hex counter (for hex-by-hex USSR movement)
@@ -187,3 +190,21 @@ TG, TT, TU, TV, TX, TY
 UF, UH, UP
 
 ================================================================================
+
+
+SAVE/LOAD SYSTEM
+================================================================================
+K$         Keyboard input for menu choices (S=Save, L=Load, E=End Turn)
+File: ICBM.SAV on device 8 (disk drive)
+
+Save File Format (Sequential):
+  - Turn number, victory points, first launch flag
+  - Counters (MC, AC, CC, BC)
+  - All missiles (9 fields each)
+  - All ABM sites (4 fields each)
+  - All cities (3 fields each)
+  - All bases (2 fields each)
+
+Load available at game startup
+Save available at end of USA turn
+
