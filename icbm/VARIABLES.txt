@@ -28,6 +28,7 @@ C$(50,3)   City data array (50 cities max)
            Field 0: Hex location
            Field 1: Point value remaining
            Field 2: Owner ("1"=USA, "2"=USSR)
+           Field 3: ABM coverage count (cached at USSR turn start for performance)
 
 B$(30,2)   Base data array (30 bases max)
            Field 0: Hex location
