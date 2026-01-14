@@ -2,14 +2,14 @@
 ICBM GAME - VARIABLE REFERENCE
 ================================================================================
 All variables are 2 characters max (PET BASIC limitation)
-Last updated: 2024-12-22
+Last updated: 2026-01-12 (Save/Load System Complete)
 
 ================================================================================
 ARRAYS
 ================================================================================
 M$(100,8)  Missile data array (100 missiles max)
            Field 0: Hex location (e.g., "1007")
-           Field 1: Type (e.g., "TT", "M2", "M3", "SS18")
+           Field 1: Type code (1-9, see MISSILE TYPE CODES below)
            Field 2: Duration remaining (turns in flight)
            Field 3: Movement points per turn
            Field 4: Strength (damage to cities)
@@ -28,10 +28,33 @@ C$(50,3)   City data array (50 cities max)
            Field 0: Hex location
            Field 1: Point value remaining
            Field 2: Owner ("1"=USA, "2"=USSR)
+           Field 3: TARGET COUNTER ENCODING (ones=ABM count, tens=missiles targeting)
+                    Example: "23" = 3 ABMs nearby, 2 missiles targeting
+                    Recalculated each USSR turn for targeting optimization
 
 B$(30,2)   Base data array (30 bases max)
            Field 0: Hex location
-           Field 1: Number of missiles at base
+           Field 1: Owner ("1"=USA, "2"=USSR)
+
+================================================================================
+MISSILE TYPE CODES (Numeric Encoding)
+================================================================================
+Due to PET BASIC 2-char variable limit, missile types use numeric codes:
+
+USSR Missiles:
+  1 = SS18  (Duration:4, Move:10, Strength:8)
+  2 = SS9   (Duration:4, Move:10, Strength:6)
+  3 = SS19  (Duration:4, Move:8,  Strength:5)
+  4 = SS17  (Duration:4, Move:8,  Strength:3)
+  5 = SS11  (Duration:4, Move:8,  Strength:2)
+  6 = SS13  (Duration:4, Move:6,  Strength:1)
+
+USA Missiles:
+  7 = M2    (Minuteman II,  Duration:4, Move:9, Strength:3)
+  8 = M3    (Minuteman III, Duration:4, Move:9, Strength:6)
+  9 = TT    (Titan II,      Duration:4, Move:9, Strength:7)
+
+Display conversion: GOSUB 19000 sets MT$ to display name
 
 ================================================================================
 COUNTERS & INDICES
@@ -40,8 +63,10 @@ AC         ABM Counter - total number of ABM sites created
 BC         Base Counter - total number of missile bases created
 CC         City Counter - total number of cities loaded
 MC         Missile Counter - total number of missiles created
+MI         Missile Index (used during LOAD to track reconstruction)
 I          Generic loop counter (primary)
 J          Generic loop counter (secondary)
+J1-J9      Loop counters for missile type reconstruction (LOAD)
 K          Generic loop counter (tertiary)
 
 ================================================================================
@@ -54,8 +79,10 @@ SP         USA (Self) Points (victory points)
 ML         Missiles Left to deploy (during USA setup)
 UH         USSR Header printed flag (for movement display)
 UF         USA moving header printed Flag (for movement display)
-LC         Line Counter (for screen pause during USSR movement)
-MT         Missile Type string (for padding display)
+LC         Line Counter (for screen pause during movement & LOAD display)
+MT$        Missile Type string (from conversion subroutine 19000)
+CH$        Choice input (N=New, L=Load, E=End, S=Save)
+OW$        Owner string (USA or USSR, for display purposes)
 
 ================================================================================
 ACTIVATION & MOVEMENT
@@ -69,22 +96,23 @@ BM         Base Missiles count (missiles at selected base)
 BZ         Base siZe (temp variable for USSR base selection)
 SL         Slots Left (activation slots remaining)
 AB         Activated from Base (count from current base)
-YN         Yes/No response string
-BB         Best Base hex (USSR AI selection)
-BF         Best Fit base hex (USSR AI fallback - smallest base)
+YN$        Yes/No response string
+BB$        Best Base hex (USSR AI selection)
+BF$        Best Fit base hex (USSR AI fallback - smallest base)
 R          Roll result (die roll)
 
 ================================================================================
 MISSILE DEPLOYMENT (USA SETUP)
 ================================================================================
-TT         Titan II missiles remaining
-M2         Minuteman II missiles remaining
-M3         Minuteman III missiles remaining
+TT         Titan II missiles remaining (code 9)
+M2         Minuteman II missiles remaining (code 7)
+M3         Minuteman III missiles remaining (code 8)
 NT         Number of TT missiles for this base
 N2         Number of M2 missiles for this base
 N3         Number of M3 missiles for this base
 BM         Base Missiles (total for current base)
 BH$        Base Hex location (string)
+BO$        Base Owner (used during LOAD)
 
 ================================================================================
 ABM DEPLOYMENT
@@ -97,9 +125,14 @@ MISSILE TARGETING & MOVEMENT
 ================================================================================
 TG$        Target hex (string)
 TV         Target Value (point value of target city)
+BA         Best ABM count (fewest ABM sites near best target - USSR AI)
+CA         City ABM count (ABM sites within 3 hexes of candidate city - USSR AI)
+CV         City Value (temp for USSR AI evaluation)
+TC         Target Counter (extracted from C$(J,3) encoding - tens digit)
 NH$        Next Hex (string - where missile is moving to)
 FH$        From Hex (string - where activating missile from)
 MH         Movement Hex counter (for hex-by-hex USSR movement)
+MP         Movement Points (remaining for current missile)
 MID        Missile ID (index in M$ array for found missile)
 
 ================================================================================
@@ -150,9 +183,24 @@ BIDDING
 CB         Computer Bid (USSR's bid for first launch)
 
 ================================================================================
+SAVE/LOAD VARIABLES
+================================================================================
+ER         Error flag (1=too many missiles during LOAD, stops reconstruction)
+S1         SS18 count (type code 1) at current base
+S2         SS9 count (type code 2) at current base
+S3         SS19 count (type code 3) at current base
+S4         SS17 count (type code 4) at current base
+S5         SS11 count (type code 5) at current base
+S6         SS13 count (type code 6) at current base
+M7         M2 count (type code 7) at current base
+M8         M3 count (type code 8) at current base
+T9         TT count (type code 9) at current base
+
+================================================================================
 USER INPUT
 ================================================================================
 K$         Keyboard input (GET statement - single character)
+CH$        Choice input (menu selections)
 
 ================================================================================
 NOTES
@@ -167,23 +215,70 @@ NOTES
 ================================================================================
 RESERVED - DO NOT USE
 ================================================================================
-These 2-character combinations are used by the code:
-AC, AD, AH, AM, AN, AR, AX, AY
-BC, BH, BJ, BM
-CB, CC, CV, CX
+System reserved (cause conflicts or crashes):
+FN         Function definition prefix - RESERVED BY BASIC
+ST         Status variable - RESERVED BY BASIC
+TI         Timer - RESERVED BY BASIC
+TO         FOR...TO keyword - RESERVED BY BASIC
+
+Used by game code (2-character combinations):
+AB, AC, AD, AF, AH, AM, AN, AR, AX, AY
+BA, BC, BF, BH, BJ, BM, BO, BZ
+CA, CB, CC, CH, CV, CX
 DF, DI, DT, DX, DY
-F1, FH, FX, FY
+ER
+F1, FH, FR, FX, FY
 HI
-I, IM
-J
+I
+J, J1, J2, J3, J4, J5, J6, J7, J8, J9
 K, K$
 LC
-M2, M3, MC, MID, ML, MS, MT, MX, MY
-N2, N3, NA, ND, NH, NL, NR, NT, NX, NY
+M2, M3, M7, M8, MC, MH, MI, MID, ML, MP, MT, MX, MY
+N2, N3, NA, ND, NH, NL, NR, NS, NT, NX, NY
 OW
-R
-SP
-TG, TT, TU, TV, TX, TY
+R, RG
+S1, S2, S3, S4, S5, S6, SL, SP
+T9, TC, TG, TR, TT, TU, TV, TX, TY
 UF, UH, UP
+YN
+
+================================================================================
+SAVE/LOAD SYSTEM
+================================================================================
+Files created on device 8 (disk):
+  ICBM-HEAD     - Turn, scores, counters (TU, UP, SP, F1, MC, AC, CC, BC)
+  ICBM-BASES    - Base hex, owner, then 9 missile type counts (S1-S6, M7-M9)
+  ICBM-ABM      - ABM hex, owner, rounds, designation letter
+  ICBM-ACTIVE   - Active missile data (hex, type code, duration, move, str, owner, target)
+  ICBM-CITIES   - City hex, value, owner
+
+Channel Usage:
+  Channel 1: ICBM-HEAD, ICBM-BASES, ICBM-ABM
+  Channel 2: ICBM-ACTIVE
+  Channel 3: ICBM-CITIES
+
+Menu options:
+  Main menu: (N)ew Game, (L)oad Saved Game
+  After USA turn: (E)nd Turn, (S)ave Game
+
+Game State Display After Load:
+  1. Shows all bases with USA/USSR owner
+  2. Pauses every 20 lines if needed, then prompts to continue
+  3. Clears screen and shows all ABM sites with USA/USSR owner
+  4. Pauses every 20 lines if needed, then prompts to continue
+  5. Clears screen and shows all active missiles with USA/USSR owner
+  6. Pauses every 20 lines if needed, then prompts to continue
+  7. Clears screen and resumes game
+
+CRITICAL FIXES IMPLEMENTED:
+  - Missile type codes are numeric (1-9) not text - avoids BASIC 2-char limit
+  - Base owner stored as "1" or "2", not missile count
+  - FOR loops use IF checks to prevent execution when count=0
+  - Different loop variables (J1-J9) for each missile type
+  - EOF(2) not reliable - use MC counter instead
+  - Separate channels for each file to avoid open/close issues
+  - K$ cleared before each GET to prevent infinite loops
+
+GOSUB 19000: Converts M$(I,1) numeric code to display name in MT$
 
 ================================================================================
