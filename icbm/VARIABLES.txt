@@ -2,7 +2,7 @@
 ICBM GAME - VARIABLE REFERENCE
 ================================================================================
 All variables are 2 characters max (PET BASIC limitation)
-Last updated: 2026-01-12 (Save/Load System Complete)
+Last updated: 2026-01-14 (Phase 2 - Multi-site ABM System)
 
 ================================================================================
 ARRAYS
@@ -16,7 +16,10 @@ M$(100,8)  Missile data array (100 missiles max)
            Field 5: Owner ("1"=USA, "2"=USSR)
            Field 6: Status ("0"=inactive, "1"=active, "8"=impacted, "9"=destroyed)
            Field 7: Target hex (where missile is headed)
-           Field 8: ABM attacked hex (last hex where ABM engaged, prevents double attack)
+           Field 8: ABM sites fired (list of site indices that fired at this missile this hex)
+                    Format: "1:3:5:" means sites 1, 3, and 5 have fired
+                    Cleared when missile moves to new hex (line 9676)
+                    Prevents same site from firing twice at same hex
 
 A$(15,4)   ABM site data array (15 sites max)
            Field 0: Hex location
@@ -121,6 +124,14 @@ AH$        ABM Hex location (string)
 AR         ABM Rounds allocated to this site
 
 ================================================================================
+ABM INTERCEPTION (MULTI-SITE SYSTEM)
+================================================================================
+R1-R9      Rounds to fire from sites 1-9 (temp during ABM prompt)
+           Cleared at start of prompt (line 10525)
+           Used to store player choices before deducting
+SI         Site Index counter (sites in range)
+
+================================================================================
 MISSILE TARGETING & MOVEMENT
 ================================================================================
 TG$        Target hex (string)
@@ -155,16 +166,16 @@ MX         Missile X coordinate
 MY         Missile Y coordinate
 
 ================================================================================
-ABM INTERCEPTION
+ABM INTERCEPTION (LEGACY VARIABLES - STILL IN USE)
 ================================================================================
 OW         Owner of missile being checked (1=USA, 2=USSR)
 DF         Defender checking for ABM (opposite of OW)
 NS         Number of Sites in range
-NR         Nearest ABM site (index in A$ array)
-ND         Nearest Distance (to nearest ABM)
+NR         Nearest ABM site (index in A$ array - USSR AI use)
+ND         Nearest Distance (to nearest ABM - USSR AI use)
 AD         ABM Distance (distance from specific ABM to missile)
 TR         Total Rounds to fire (combined from all sites)
-FR         Fire Rounds (from specific site, also loop counter)
+FR         Fire Rounds (loop counter and temp for rounds from site)
 RG         Range to target (1, 2, or 3 hexes)
 HI         Hit flag (1=hit, 0=miss)
 AF$        ABM Fire response (Y/N from player)
@@ -236,8 +247,8 @@ LC
 M2, M3, M7, M8, MC, MH, MI, MID, ML, MP, MT, MX, MY
 N2, N3, NA, ND, NH, NL, NR, NS, NT, NX, NY
 OW
-R, RG
-S1, S2, S3, S4, S5, S6, SL, SP
+R, R1, R2, R3, R4, R5, R6, R7, R8, R9, RG
+S1, S2, S3, S4, S5, S6, SI, SL, SP
 T9, TC, TG, TR, TT, TU, TV, TX, TY
 UF, UH, UP
 YN
@@ -253,9 +264,8 @@ Files created on device 8 (disk):
   ICBM-CITIES   - City hex, value, owner
 
 Channel Usage:
-  Channel 1: ICBM-HEAD, ICBM-BASES, ICBM-ABM
+  Channel 1: ICBM-HEAD, ICBM-BASES, ICBM-ABM, ICBM-CITIES
   Channel 2: ICBM-ACTIVE
-  Channel 3: ICBM-CITIES
 
 Menu options:
   Main menu: (N)ew Game, (L)oad Saved Game
@@ -278,6 +288,18 @@ CRITICAL FIXES IMPLEMENTED:
   - EOF(2) not reliable - use MC counter instead
   - Separate channels for each file to avoid open/close issues
   - K$ cleared before each GET to prevent infinite loops
+
+PHASE 2 - MULTI-SITE ABM SYSTEM:
+  - M$(I,8) cleared at start of each missile movement (line 9676)
+  - M$(I,8) stores list of site indices that fired this hex (e.g., "1:3:5:")
+  - USA ABM prompt (10505-10597):
+    * Prompts for rounds from all sites in range
+    * Stores choices in R1-R9 variables
+    * Deducts ALL rounds immediately (before rolling)
+    * Adds fired sites to M$(I,8) to prevent re-firing same hex
+    * Rolls for all rounds until missile hit or all rounds exhausted
+  - Same site CAN fire at same missile in different hexes
+  - Site CANNOT fire twice at same missile in same hex
 
 GOSUB 19000: Converts M$(I,1) numeric code to display name in MT$
 
